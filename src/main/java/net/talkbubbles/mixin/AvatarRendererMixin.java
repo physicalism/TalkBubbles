@@ -31,6 +31,12 @@ public abstract class AvatarRendererMixin<AvatarlikeEntity extends Avatar & Clie
     private void extractRenderStateMixin(AvatarlikeEntity entity, AvatarRenderState state, float partialTicks, CallbackInfo info) {
         AvatarRenderStateAccessor access = (AvatarRenderStateAccessor) state;
 
+        // Guard against any avatar type that does not carry bubble data (players and mannequins do).
+        if (!(entity instanceof AbstractClientPlayerEntityAccessor)) {
+            access.talkBubbles$setChatText(null);
+            return;
+        }
+
         int oldAge = ((AbstractClientPlayerEntityAccessor) entity).talkBubbles$getOldAge();
         if (oldAge == 0 || oldAge == -1) {
             access.talkBubbles$setChatText(null);

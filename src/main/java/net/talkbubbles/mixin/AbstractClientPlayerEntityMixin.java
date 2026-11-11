@@ -7,12 +7,13 @@ import org.spongepowered.asm.mixin.Mixin;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
+import net.minecraft.client.entity.ClientMannequin;
 import net.minecraft.client.player.AbstractClientPlayer;
 import net.talkbubbles.accessor.AbstractClientPlayerEntityAccessor;
 import org.spongepowered.asm.mixin.Unique;
 
 @Environment(EnvType.CLIENT)
-@Mixin(AbstractClientPlayer.class)
+@Mixin({ AbstractClientPlayer.class, ClientMannequin.class })
 public class AbstractClientPlayerEntityMixin implements AbstractClientPlayerEntityAccessor {
 
     @Unique
